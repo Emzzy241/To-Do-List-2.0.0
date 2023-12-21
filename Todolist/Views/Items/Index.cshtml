@@ -14,6 +14,8 @@
       crossorigin="anonymous">
   </head>
   <body>
+  <div class="container">
+  
     <h1>To Do List</h1>
 
     <ul>
@@ -22,7 +24,7 @@
             @foreach (Item myItem in Model)
           {
           
-            <li>@myItem.Description</li>
+            <a href="/items/@myItem.Id"><li>@myItem.Description</li></a>
       
           } 
         
@@ -33,14 +35,16 @@
           }
      
     
-
 </ul>
     <p>Click the link to add more To Do's</p>
     <a href="items/new" class="btn btn-dark">Add</a>
     <a href="/" class="btn btn-dark">Home</a>
+<br>
+<br>
 
     <form action="items/delete" method="get">
-      <button class="btn btn-danger" type="submit">Clear All </button>
+      <button class="btn btn-danger" type="submit">Clear All Items</button>
     </form>
+  </div>
   </body>
 </html>

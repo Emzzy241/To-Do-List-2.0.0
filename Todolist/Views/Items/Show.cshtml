@@ -1,7 +1,3 @@
-@using System;
-@using System.Collections.Generic;
-@using ToDoList.Models;
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,16 +10,11 @@
       crossorigin="anonymous">
   </head>
   <body>
-  <div class="container">
-    <h1>Are you sure you want to clear all?</h1>
+    <h1>To Do List Item Details: </h1>
 
-     
-      <a class="btn btn-primary" href="/items">no </a>
-      <br>
-      <br>
-    <form action="deleteall" method="post">
-      <button class="btn btn-danger" type="submit">Yes </button>
-    </form>
-    </div>
+    <h2>@Model.Description</h2>
+
+    <a href='/items/new'>Add another item</a>
+    <a href='/items'>View all items</a>
   </body>
 </html>
