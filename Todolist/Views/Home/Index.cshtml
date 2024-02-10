@@ -10,9 +10,17 @@
       crossorigin="anonymous">
   </head>
   <body>
+      @{
+        Layout = "_Layout";
+
+      // The code at the top of the page is called a Razor code block and it's another way to indicate Razor code. In this case, we're letting the page know that we want to use _Layout.cshtml as the layout file.
+    }
     <h1>Welcome to the To Do List!</h1>
-    <a href='/items/new'>Add a new item</a>
+    <a href='/categories/new'>Add a new Category</a>
     <br />
-    <a href='/items'>See list of items</a>
+    <a href='/categories'>View categories</a>
+
+    
+    </div>
   </body>
 </html>

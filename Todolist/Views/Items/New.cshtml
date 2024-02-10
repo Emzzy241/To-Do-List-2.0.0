@@ -12,11 +12,14 @@
   <body>
   <div class="container">
     <h1>To Do List</h1>
-    <h4>Enter your TODO's</h4>
+    <h1>Add a new item to @Model.Name</h1>
 
-     <form action="/items" method="post">
-      <label for="description">Add a new item</label>
-      <input class="container" id="description" name="description" type="text">
+      <form action="/categories/@Model.Id/items" method="post">
+        <input id="categoryId" name="categoryId" type="hidden" value="@Model.Id"> @* This will pass the Category ID alongside the user's form input to the Create() route that processes this form's submission. However, since its input type is hidden, it won't display anything to the user.*@
+        <label for="itemDescription">Item Description</label>
+        <input id="itemDescription" name="itemDescription" type="text">
+        <button type='submit'>Add Item</button>
+
       <br>
       <br>
       <center>
@@ -24,6 +27,7 @@
       <button type="submit" class="btn btn-primary">Submit</button>
       </center>
     </form>
+
     </div>
   </body>
 </html>
