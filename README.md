@@ -7,27 +7,58 @@
 * Git
 * C#
 * .NET6.0 Framework
-* MS Test
+* Unit Testing with MS Test
+* Asp.Net
 
 ## Description
 _Add in multiple tasks you are yet to do into your TODO List._
 
 ## Setup/Installation
-* Open your git bash Terminal to Clone the Project with a (git clone _REPOSITORY_NAME_)
-* Ensure you have the .NET6.0 Framework Installed(I used .NET6.0.402 For this Application) on your PC and you must have done the essential steps to at least writing a C# code in the REPL 
-* If you're not interested in seeing the Build message, run the command: dotnet run, this builds and runs the application for you but if you are interested in seing the Build message carry out the 2 steps below
-* Still in the Git bash Terminal, run the command: dotnet build --- This builds The Project and adds the essential directories to execute the application
-* After building the application, Now its time to run the command: dotnet run --- And still in the Git Bash Terminal, you get to see all of the results outputted into the console
+1. **Clone the Repository**: Open your Git Bash terminal and run the following command to clone the project:
+    ```sh
+    git clone _REPOSITORY_NAME_
+    ```
 
+2. **Install .NET 6.0 Framework**: Ensure you have the .NET 6.0 Framework installed (used .NET 6.0.402 for this application) on your PC. Make sure you have completed the essential steps to write C# code in the REPL.
+
+3. **Create `appSettings.json`**: After cloning the repository, you need to create an `appSettings.json` file in the root directory of the project. Be sure to create it in the production directory of your project (`ToDoList.Solution/ToDoList/appSettings.json`). Use the following template for your `appSettings.json`:
+
+    ```json
+    {
+        "ConnectionStrings": {
+            "DefaultConnection": "Server=localhost;Port=3306;database=to_do_list_with_mysqlconnector;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
+        }
+    }
+    ```
+
+    Replace `[YOUR-USERNAME-HERE]` and `[YOUR-PASSWORD-HERE]` with your actual MySQL username and password.
+
+4. **Build and Run the Application**:
+    - If you're not interested in seeing the build messages, run the following command to build and run the application:
+      ```sh
+      dotnet run
+      ```
+      This command builds and runs the application for you.
+
+    - If you are interested in seeing the build messages, follow these steps:
+        1. **Build the Project**: Run the following command to build the project and add the essential directories to execute the application:
+            ```sh
+            dotnet build
+            ```
+
+        2. **Run the Project**: After building the application, run the following command to see all of the results outputted into the console:
+            ```sh
+            dotnet run
+            ```
 
 ## Detected Bugs/ Issues
-* No detected bugs_
+* No detected bugs
 
-## license 
+## License 
 Licensed under the GNU General Public License
 
 ## Contact Info
 * _Email: emzzyoluwole@gmail.com_
 * _Instagram @Emmanuel.9944_
 * _Twitter: @Emzzy241 and Profile Name: Dynasty_
-* _Github Username: Emzzy241_-
+* _Github Username: Emzzy241_

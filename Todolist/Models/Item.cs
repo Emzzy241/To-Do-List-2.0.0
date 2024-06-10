@@ -1,3 +1,4 @@
+// using MySqlConnector;
 using System;
 using System.Collections.Generic;
 
@@ -16,6 +17,8 @@ namespace ToDoList.Models
         public Item(string myDescription)
         {
             Description = myDescription;
+            //   Id = id;
+
             //  Remember that when we are working inside an object, we can use the keyword this to reference that object. In the code above, we use this to reference the Item being actively constructed by the constructor.
             _myList.Add(this);
             // This assigns an Item's Id to the current number of Items in the static _instances list. After the first Item is added, _instances.Count will be 1. After the second Item, it'll be 2, and so on. Using _instances.Count to assign Id ensures each is always unique. Note that we do this after adding Items to the _instances list in order to get an updated Count for Id.
@@ -27,6 +30,32 @@ namespace ToDoList.Models
         { 
             return _myList; 
         }
+
+        //  public static List<Item> GetAll()
+        // {
+        //     List<Item> allItems = new List<Item> { };
+
+        //     MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
+        //     conn.Open();
+
+        //     MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+        //     cmd.CommandText = "SELECT * FROM items;"; // just like you did on bash
+
+        //     MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+        //     while (rdr.Read())
+        //     {
+        //         int itemId = rdr.GetInt32(0);
+        //         string itemDescription = rdr.GetString(1);
+        //         Item newItem = new Item(itemDescription, itemId);
+        //         allItems.Add(newItem);
+        //     }
+        //     conn.Close();
+        //     if (conn != null)
+        //     {
+        //         conn.Dispose();
+        //     }
+        //     return allItems;
+        // }
         
         public static void ClearAll() 
         { 
@@ -38,6 +67,13 @@ namespace ToDoList.Models
         public static Item Find(int searchId)
         {
             return _myList[searchId - 1];
+
+             // Temporarily returning placeholder item to get beyond compiler errors until we refactor to work with database.
+            // Item placeholderItem = new Item("placeholder item");
+            // return placeholderItem;
         }    
+        
     }
 }
+    
+// }
