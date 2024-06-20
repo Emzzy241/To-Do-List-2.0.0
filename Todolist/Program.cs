@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using ToDoList.Models;
 
 namespace ToDoList
 {
@@ -11,8 +12,8 @@ namespace ToDoList
 
       builder.Services.AddControllersWithViews();
 
-      // new line!
-      // DBConfiguration.ConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+      // new line! -- We want to set the value of the ConnectionString property to the database connection string within appsettings.json; Remember that when we defined ConnectionString in the DatabaseConfig file, we made both the class and the property static i.e an instance of the class & an instance of the class' property cannot be created
+      DBConfiguration.ConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
       WebApplication app = builder.Build();
 

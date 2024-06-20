@@ -39,6 +39,8 @@ namespace ToDoList.Controllers
       Dictionary<string, object> model = new Dictionary<string, object>();
       Category foundCategory = Category.Find(categoryId);
       Item newItem = new Item(itemDescription);
+      // New code: After save to db has been implemented. Calling our Save() method after we create new instances of Item objects in the CategoriesController
+      newItem.Save();
       foundCategory.AddItem(newItem);
       List<Item> categoryItems = foundCategory.Items;
       model.Add("items", categoryItems);
@@ -56,17 +58,16 @@ namespace ToDoList.Controllers
         model.Add("category", selectedCategory);
         model.Add("items", categoryItems);
         return View(model);
-        /*
-            We're doing something new here. Because this page will display both a Category and all Item objects saved within that Category, we must pass two types of objects to the view. However, View() can only accept one model argument. To work around this, we do the following:
-            Create a new Dictionary called model because a Dictionary can hold multiple key-value pairs.
-            Add both the Category and its associated Items to this Dictionary. These will be stored with the keys "category" and "items".
-            The Dictionary, which is named model, will be passed into View().
+            // We're doing something new here. Because this page will display both a Category and all Item objects saved within that Category, we must pass two types of objects to the view. However, View() can only accept one model argument. To work around this, we do the following:
+            // Create a new Dictionary called model because a Dictionary can hold multiple key-value pairs.
+            // Add both the Category and its associated Items to this Dictionary. These will be stored with the keys "category" and "items".
+            // The Dictionary, which is named model, will be passed into View().
         
-            In the Show.cshtml file;
-            We loop through all Items in the model. We passed the view a Dictionary containing key-value pairs, so we access Items with @Model["items"] square bracket notation.
-            For each Item, we display its description in a <li>.
-            We've also made each <li> a link to the path '/categories/@Model["category"].Id/items/@item.Id'. This will be the item's detail view. We already have an Item detail page associated with the Show() route on the ItemsController, but it's not at this super long path! Don't worry, this is intentional. We'll discuss what's up in the next lesson.
-        */
+            // In the Show.cshtml file;
+            // We loop through all Items in the model. We passed the view a Dictionary containing key-value pairs, so we access Items with @Model["items"] square bracket notation.
+            // For each Item, we display its description in a <li>.
+            // We've also made each <li> a link to the path '/categories/@Model["category"].Id/items/@item.Id'. This will be the item's detail view. We already have an Item detail page associated with the Show() route on the ItemsController, but it's not at this super long path! Don't worry, this is intentional. We'll discuss what's up in the next lesson.
+        
 
     }
   
