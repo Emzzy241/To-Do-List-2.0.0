@@ -19,7 +19,7 @@ _Add in multiple tasks you are yet to do into your TODO List._
     git clone _REPOSITORY_NAME_
     ```
 
-2. **Install .NET 6.0 Framework**: Ensure you have the .NET 6.0 Framework installed (used .NET 6.0.402 for this application) on your PC. Make sure you have completed the essential steps to write C# code in the REPL.
+2. **Install .NET 6.0 Framework**: Ensure you have the .NET 6.0 Framework installed (used .NET 6.0.402 for this application) on your PC. Make sure you have completed the essential steps to write C# code in the C# REPL Terminal.
 
 3. **Create `appSettings.json`**: After cloning the repository, you need to create an `appSettings.json` file in the root directory of the project. Be sure to create it in the production directory of your project (`ToDoList.Solution/ToDoList/appSettings.json`). Use the following template for your `appSettings.json`:
 

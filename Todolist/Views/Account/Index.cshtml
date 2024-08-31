@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+<h2>Authentication with Identity</h2>
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+  <p>Hello @User.Identity.Name!</p>
+  <p>You are currently logged in</p>
+  @using (Html.BeginForm("LogOff", "Account"))
+  {
+    <input type="submit" class="btn btn-primary" value="Log out" />
+    
+
+    <p>@Html.ActionLink("Manage items", "Index", "Items")</p> 
+    <p>@Html.ActionLink("Manage categories", "Index", "Categories")</p>
+    <p>@Html.ActionLink("Manage tags", "Index", "Tags")</p>
+    <p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>
+      }
+}
+else
+{
+  <p>@Html.ActionLink("Register", "Register")</p>
+  <p>@Html.ActionLink("Log in", "Login")</p>
+}
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+
+@{
+    /*
+      We added an if/else statement to display a greeting to the user if they are logged in. If they aren't, we display links to register or log in. Our if statement relies on accessing the User variable, which is a property called RazorPageBase.User, but is of the type System.Security.Claims.ClaimsPrincipal.
+      We can access two properties through the User.Identity property:
+      User.Identity.Name gives us the currently logged in user's name (for us, their email) or null if there is none.
+      User.Identity.IsAuthenticated gives us true if there's an authenticated user (meaning, a user who is logged in), or false if there is no currently logged in user.
+      Note that we can access both of the above properties anywhere in our views, as needed. User.Identity.IsAuthenticated is particularly useful for creating conditionals that display information only to authenticated users.
+    */
+}

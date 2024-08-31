@@ -1,0 +1,46 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ToDoList.Models
+@model ToDoList.Models.Item
+
+<h2>Item Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>  
+<h3>@Html.DisplayNameFor(model => model.Category): @Html.DisplayFor(model => model.Category.Name)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This item does not have any tags yet!</p>
+}
+else
+{
+  <h4>This item has the following tags:</h4>
+  <ul>
+    @foreach(ItemTag join in Model.JoinEntities)
+    {
+        // looping through the JoinEntitites property to display each item's description
+      <li>Tag: @join.Tag.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Items"))
+      {
+        @Html.Hidden("joinId", @join.ItemTagId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Item or Category", "Edit", new { id = Model.ItemId })</p>
+<p>@Html.ActionLink("Add a Tag", "AddTag", new { id = Model.ItemId })</p>
+<p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</p>
+
+
+@{
+    // Again we start with a reference directive so the view can reference the model
+    // We use the new HTML helper methods: DisplayNameFor() and DisplayFor(). 
+    // DisplayNameFor() displays the property name
+    // DisplayFor() displays the value of that property
+    // Lastly, we use another ActionLink() to take users back to the index route
+}

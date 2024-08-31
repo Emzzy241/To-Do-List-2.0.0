@@ -1,0 +1,15 @@
+@{
+    Layout = "_Layout";
+}
+
+@model ToDoList.Models.Category
+
+<h2>Are you sure you want to log out</h2>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm("LogOff", "Account"))
+{
+    <input type="submit" value="Log out"/>
+}
+
+@Html.ActionLink("Back to Accounts page", "Index")

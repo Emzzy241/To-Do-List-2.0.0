@@ -1,0 +1,48 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ToDoList.ViewModels
+
+@model RegisterViewModel
+
+<h2>Register a new user</h2>
+<hr />
+
+@if(!ViewData.ModelState.IsValid) 
+{
+  @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:") 
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+  @Html.LabelFor(user => user.Email)
+  @Html.TextBoxFor(user => user.Email)
+
+  @Html.LabelFor(user => user.Password)
+  @Html.EditorFor(user => user.Password)
+
+  @Html.LabelFor(user => user.ConfirmPassword)
+  @Html.EditorFor(user => user.ConfirmPassword)
+
+  <input type="submit" value="Register" />
+}
+
+<p>@Html.ActionLink("Back to accounts page", "Index")</p>
+
+@{
+    /*
+        Most of this code should be familiar from previous forms, with a few new elements.
+        We use the HTML helper method EditorFor for our Password and ConfirmPassword fields. The EditorFor helper method will change the input's type attribute based on our [DataType(DataType.Password)] validation attribute; in this case, it will create the input with type="password", which will turn any input into black dots. Note that we can't use the TextBoxFor HTML helper in this case, because type is always set to "text".
+        We're also using a new HTML helper method to display error messages if our validation determines that our model is invalid: ValidationSummary(). This method generates a bullet point list of all of the current errors. We can optionally pass an argument to the ValidationSummary() method to give an introduction to our list. Because we've passed "Please fix the following error(s) and then resubmit the form:"
+        Using ValidationSummary() is particularly helpful for us, because it handles displaying all of the Identity errors that we (possibly) generate when we try to create a new user. This means that we don't have to worry about itemizing each of error with the ValidationMessage() or ValidationMessageFor() methods, which only handles displaying one single error message each.
+
+        The if statement checks if our model's state is invalid, and if so, then displays the summary of errors. If we don't include the if statement, then we would see "Please fix the following error(s) and then resubmit the form:" on our screen regardless of whether or not there are any errors. This would be confusing to users. We could instead choose to not include an introductory sentence for the list simply by invoking @Html.ValidationSummary() with no arguments. This choice is up to you.
+        The last thing to notice here is that we wrap our ValidationSummary() in an if statement.
+        You may be wondering, what's ViewData? Well, ViewData is a Dictionary that holds the data that's passed to the view, including ModelState as well as anything that we add to our ViewBag in our controllers. If you want more information, the MS Docs have great examples for ViewData and ViewBag that clearly illustrate their differences.
+        Identity's default requirements for a password is at least six characters, a capital letter, a lowercase letter, a number, and a special character. We can override these requirements, leave them as is, or increase them. We'll start by adding a validation attribute for this, and then later we'll learn how to change these default settings.
+        Since password requirements check for many different things, the best way to verify all of them is with a regular expression (also called "regex"). We don't need to be an expert with regular expressions to research how to use them. In fact the regular expression we'll use was taken from this stack overflow discussion. However, there are many regex generator sites out there, and with practice you can quickly teach yourself and remember the basics.
+    
+    */
+
+}

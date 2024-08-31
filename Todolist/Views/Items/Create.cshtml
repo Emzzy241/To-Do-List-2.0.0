@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ToDoList.Models.Item
+
+
+<h4>Add a new item</h4>
+
+<p>@Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+<p>@Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+<p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description)
+
+  @Html.LabelFor(model => model.Category)
+  @Html.DropDownList("CategoryId")
+
+  <input type="submit" value="Add new item" class="btn btn-primary" />
+}
+<p>@Html.ActionLink("Show all items", "Index")</p>
+
+
+@{
+    /* BeginForm sends an HTTP post request by default to the concerned URL. i.e this form will SEND a POST request to the Create() route. Previously, we did it like this: <form action="/Items/Create" method="post">
+      @Html.LabelFor generates a label for a form field
+      @Html.TextBoxFor generates a text box for a form field
+      When an HTML helper method contains "For" in its name, that means it is a strongly typed HTML helper
+      We use an HTML helper method called DropDownList(), we give DropDownList() the string name of a ViewBag property of the type SelectList. Since we saved our SelectList as ViewBag.CategoryId, we give DropDownList() the string "CategoryId". This helper method will create an html dropdown select list out of the SelectList object.
+      We're making use of a new strongly typed HTML helper called ValidationMessageFor() that returns the HTML markup for a validation-error message for the specified model property, in this case CategoryId. The ValidationMessageFor() method takes two arguments, plus a third optional argument:
+      The first argument specifies the model property CategoryId that this validation message is for.
+      The second argument is an empty string acting as a placeholder for the ErrorMessage we set in the [Range()] validation attribute. If the model is valid, ValidationMessageFor() will display nothing on the page (per the empty string). If the model is not valid, then ValidationMessageFor() will display our error message replacing the empty string placeholders with "You must add your item to a category. Have you created a category yet?".
+      The third argument is optional and it contains an object with options that we want to specify for our HTML element. In this case, we're adding a new class set to Bootstrap's "text-danger" which will make our text red, and a new inline style that will make our text bold.
+      The last step we have to complete is to actually direct our controller to check the state of our model.
+
+      At this point we can run our application and see that we'll get an error message if we leave the description input blank when we create new items. Note that we don't need to make any updates to the item's Create() POST action, because if the model state is invalid we return the entire invalid item object from which the CategoryId and Description properties can be accessed.
+
+    */
+} 

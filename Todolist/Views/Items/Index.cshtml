@@ -1,0 +1,33 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ToDoList.Models;
+
+<h1>Items for @User.Identity.Name</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No items have been added yet!</h3>
+} 
+else
+{
+  <ul>
+    @foreach (Item item in Model)
+    {
+      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add new item", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+@{
+    // Our ActionLink() method will route to a Details action in the ItemsController. 
+    // We are passing a different kind of variable as an optional argument. ActionLink() can take an object containing data that will be passed as arguments to the controller action it routes to.
+    // The code: new { id = item.ItemId} creates an anonymous object with the property id; this is hopw .NET knows which id to use in the Details() action.
+    // However, for .NET to route us to the details page for a specific Item, the property names of the object we pass in must match parameter names used by the target method
+    // Here, the property of the anonymous object id must match the parameter name in our Details() proute like this: Details(int id).... It is case sensitive, ensure you follow it to avoid errors
+    // Because we've added the [Authorize] attribute to our ItemsController, we know that only logged in users will be able to view this page, so we can safely update our header to directly address the user's Name.
+    // So what happens if an unauthorized user (who is not signed in) tries to access our item's Index.cshtml? Identity will automatically redirect them to the login page,
+}

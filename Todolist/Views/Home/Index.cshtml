@@ -1,26 +1,50 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>My To-Do List!</title>
-    <link 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" 
-      crossorigin="anonymous">
-  </head>
-  <body>
-      @{
-        Layout = "_Layout";
+@{
+  Layout = "_Layout";
 
-      // The code at the top of the page is called a Razor code block and it's another way to indicate Razor code. In this case, we're letting the page know that we want to use _Layout.cshtml as the layout file.
-    }
-    <h1>Welcome to the To Do List!</h1>
-    <a href='/categories/new'>Add a new Category</a>
-    <br />
-    <a href='/categories'>View categories</a>
+}
 
+@{
     
-    </div>
-  </body>
-</html>
+  // we need to make sure that our view ensures there's an authenticated user before displaying items.
+  // In this update, we check User.Identity.IsAuthenticated to determine whether there's a user that's signed in. If so, then we display the items as well as the user's name. And if not, then we display a message asking the visitor to sign in to view or manage their items.
+}
+
+@using ToDoList.Models;
+
+<h1>Welcome to the To Do List!</h1>
+
+<hr />
+
+<h4>Categories</h4>
+@if (Model["categories"].Length == 0)
+{
+  <p>No categories have been added yet!</p>
+} 
+<ul>
+  @foreach (Category cat in Model["categories"])
+  {
+    <li>@Html.ActionLink(@cat.Name, "Details", "Categories", new { id = @cat.CategoryId})</li>
+  }
+</ul>
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Items for @User.Identity.Name</h4>
+  @if (Model["items"].Length == 0)
+  {
+    <p>No items have been added yet!</p>
+  } 
+  <ul>
+    @foreach (Item item in Model["items"])
+    {
+      <li>@Html.ActionLink(@item.Description, "Details", "Items", new { id = @item.ItemId})</li>
+    }
+  </ul>
+}
+else
+{
+  <h4>Items</h4>
+  <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your items.</p>
+}
+
+<hr />
