@@ -82,6 +82,12 @@ namespace ToDoList.Controllers
       }
     }
 
+    [HttpGet]
+    public IActionResult Logout()
+    {
+      return View();
+    }
+
     [HttpPost]
     public async Task<ActionResult> LogOff()
     {
